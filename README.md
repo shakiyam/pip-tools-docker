@@ -7,7 +7,7 @@ Installation
 ------------
 
 ```console
-curl -L# https://raw.githubusercontent.com/shakiyam/pip-tools-docker/master/pip-compile \
+curl -L# https://raw.githubusercontent.com/shakiyam/pip-tools-docker/main/pip-compile \
   | sudo tee /usr/local/bin/pip-compile >/dev/null
 sudo chmod +x /usr/local/bin/pip-compile
 ```
