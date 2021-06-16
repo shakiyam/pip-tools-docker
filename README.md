@@ -1,6 +1,8 @@
 pip-tools-docker
 ================
 
+[![Publish Docker image](https://github.com/shakiyam/pip-tools-docker/actions/workflows/docker.yml/badge.svg)](https://github.com/shakiyam/pip-tools-docker/actions/workflows/docker.yml)
+
 [pip-tools](https://github.com/jazzband/pip-tools) Docker Image
 
 Installation
