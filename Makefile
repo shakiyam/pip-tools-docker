@@ -23,6 +23,10 @@ shellcheck: ## Lint shell scripts
 	@echo -e "\033[36m$@\033[0m"
 	@./shellcheck.sh pip-compile *.sh
 
+shfmt: ## Lint shell scripts
+	@echo -e "\033[36m$@\033[0m"
+	@./shfmt.sh -l -d -i 2 -ci -bn pip-compile *.sh
+
 update_requirements: ## Update requirements.txt
 	@echo -e "\033[36m$@\033[0m"
 	@./pip-compile --upgrade
