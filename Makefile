@@ -8,7 +8,7 @@ ALL_TARGETS := $(shell egrep -o ^[0-9A-Za-z_-]+: $(MAKEFILE_LIST) | sed 's/://')
 
 .PHONY: $(ALL_TARGETS)
 
-all: shellcheck hadolint update_requirements build ## Lint, update requirements.txt, and build
+all: hadolint shellcheck shfmt update_requirements build ## Lint, update requirements.txt, and build
 	@:
 
 build: ## Build an image from a Dockerfile
