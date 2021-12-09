@@ -7,7 +7,7 @@ DOCKER=$(command -v podman || command -v docker)
 readonly DOCKER
 CURRENT_IMAGE="$($DOCKER image ls -q $IMAGE_NAME:latest)"
 readonly CURRENT_IMAGE
-$DOCKER image build -t "$IMAGE_NAME" "$(dirname "$0")"
+$DOCKER image build -t "$IMAGE_NAME" .
 LATEST_IMAGE="$($DOCKER image ls -q $IMAGE_NAME:latest)"
 readonly LATEST_IMAGE
 if [[ "$CURRENT_IMAGE" != "$LATEST_IMAGE" ]]; then

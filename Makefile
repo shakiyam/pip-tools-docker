@@ -13,19 +13,19 @@ all: hadolint shellcheck shfmt update_requirements build ## Lint, update require
 
 build: ## Build an image from a Dockerfile
 	@echo -e "\033[36m$@\033[0m"
-	@./build.sh
+	@./tools/build.sh
 
 hadolint: ## Lint Dockerfile
 	@echo -e "\033[36m$@\033[0m"
-	@./hadolint.sh Dockerfile
+	@./tools/hadolint.sh Dockerfile
 
 shellcheck: ## Lint shell scripts
 	@echo -e "\033[36m$@\033[0m"
-	@./shellcheck.sh pip-compile *.sh
+	@./tools/shellcheck.sh pip-compile tools/*.sh
 
 shfmt: ## Lint shell scripts
 	@echo -e "\033[36m$@\033[0m"
-	@./shfmt.sh -l -d -i 2 -ci -bn pip-compile *.sh
+	@./tools/shfmt.sh -l -d -i 2 -ci -bn pip-compile tools/*.sh
 
 update_requirements: ## Update requirements.txt
 	@echo -e "\033[36m$@\033[0m"
