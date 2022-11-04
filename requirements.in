@@ -1,1 +1,2 @@
 pip-tools
+wheel>=0.38.0 # SNYK-PYTHON-WHEEL-3092128
