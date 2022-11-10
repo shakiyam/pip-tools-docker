@@ -16,7 +16,7 @@ pip-tools==6.9.0
     # via -r requirements.in
 pyparsing==3.0.9
     # via packaging
-wheel==0.38.3
+wheel==0.38.4
     # via pip-tools
 
 # The following packages are considered to be unsafe in a requirements file:
