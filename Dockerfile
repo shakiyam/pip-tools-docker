@@ -4,4 +4,4 @@ RUN microdnf -y install python3 pip \
   && microdnf clean all \
   && rm -rf /var/cache
 COPY requirements.txt /requirements.txt
-RUN pip3 install --no-cache-dir -r /requirements.txt
+RUN python3 -m pip install --no-cache-dir -r /requirements.txt
