@@ -12,7 +12,7 @@ all: check_for_updates lint build ## Check for updates, lint, and build
 
 build: ## Build an image from a Dockerfile
 	@echo -e "\033[36m$@\033[0m"
-	@./tools/build.sh docker.io/shakiyam/pip-tools
+	@./tools/build.sh ghcr.io/shakiyam/pip-tools
 
 check_for_library_updates: ## Check for library updates
 	@echo -e "\033[36m$@\033[0m"
