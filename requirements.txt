@@ -10,7 +10,7 @@ click==8.1.7
     # via pip-tools
 importlib-metadata==7.0.2
     # via build
-packaging==23.2
+packaging==24.0
     # via build
 pip-tools==7.4.1
     # via -r requirements.in
