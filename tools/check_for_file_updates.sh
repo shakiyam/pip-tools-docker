@@ -1,7 +1,14 @@
 #!/bin/bash
-set -eu -o pipefail
+set -Eeu -o pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+readonly SCRIPT_DIR
+# shellcheck disable=SC1091
+. "$SCRIPT_DIR"/colored_echo.sh
 
 if [[ -n $(git diff "$@") ]]; then
+  echo_warn "File changes detected:"
   git --no-pager diff "$@"
   exit 2
 fi
+echo_success "No file changes detected."
