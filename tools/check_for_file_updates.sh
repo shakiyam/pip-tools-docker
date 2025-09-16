@@ -7,7 +7,7 @@ readonly SCRIPT_DIR
 . "$SCRIPT_DIR"/colored_echo.sh
 
 if [[ -n $(git diff "$@") ]]; then
-  echo_warn "File changes detected:"
+  echo_error "File updates detected:"
   git --no-pager diff "$@"
   exit 2
 fi
