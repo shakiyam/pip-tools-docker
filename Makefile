@@ -8,7 +8,7 @@ ALL_TARGETS := $(shell grep -E -o ^[0-9A-Za-z_-]+: $(MAKEFILE_LIST) | sed 's/://
 
 all: check_for_updates lint build ## Check for updates, lint, and build
 
-build: ## Build an image from a Dockerfile
+build: ## Build Docker image
 	@echo -e "\033[36m$@\033[0m"
 	@./tools/build.sh ghcr.io/shakiyam/pip-tools
 
@@ -22,7 +22,7 @@ check_for_action_updates: ## Check for GitHub Actions updates
 
 check_for_image_updates: ## Check for image updates
 	@echo -e "\033[36m$@\033[0m"
-	@./tools/check_for_image_updates.sh "$(shell awk -e 'NR==1{print $$2}' Dockerfile)" ghcr.io/oracle/oraclelinux:9-slim
+	@./tools/check_for_image_updates.sh "$$(awk '/^FROM /{print $$2; exit}' Dockerfile)" ghcr.io/oracle/oraclelinux:9-slim
 
 check_for_library_updates: ## Check for library updates
 	@echo -e "\033[36m$@\033[0m"
@@ -40,12 +40,12 @@ help: ## Print this help
 	@echo 'Targets:'
 	@awk 'BEGIN {FS = ":.*?## "} /^[0-9A-Za-z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
-lint: hadolint shellcheck shfmt ## Lint all dependencies
+lint: hadolint shellcheck shfmt ## Run all linting
 
 shellcheck: ## Lint shell scripts
 	@echo -e "\033[36m$@\033[0m"
 	@./tools/shellcheck.sh pip-compile tools/*.sh
 
-shfmt: ## Lint shell scripts
+shfmt: ## Lint shell script formatting
 	@echo -e "\033[36m$@\033[0m"
 	@./tools/shfmt.sh -l -d -i 2 -ci -bn pip-compile tools/*.sh
