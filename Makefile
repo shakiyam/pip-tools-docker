@@ -6,7 +6,7 @@ ALL_TARGETS := $(shell grep -E -o ^[0-9A-Za-z_-]+: $(MAKEFILE_LIST) | sed 's/://
 .PHONY: $(ALL_TARGETS)
 .DEFAULT_GOAL := help
 
-all: check_for_updates lint build ## Check for updates, lint, and build
+all: check_for_updates lint build test ## Check for updates, lint, build, and test
 
 build: ## Build Docker image
 	@echo -e "\033[36m$@\033[0m"
@@ -44,8 +44,12 @@ lint: hadolint shellcheck shfmt ## Run all linting
 
 shellcheck: ## Lint shell scripts
 	@echo -e "\033[36m$@\033[0m"
-	@./tools/shellcheck.sh pip-compile tools/*.sh
+	@./tools/shellcheck.sh pip-compile test_pip_tools.sh tools/*.sh
 
 shfmt: ## Lint shell script formatting
 	@echo -e "\033[36m$@\033[0m"
-	@./tools/shfmt.sh -l -d -i 2 -ci -bn pip-compile tools/*.sh
+	@./tools/shfmt.sh -l -d -i 2 -ci -bn pip-compile test_pip_tools.sh tools/*.sh
+
+test: ## Test Docker image
+	@echo -e "\033[36m$@\033[0m"
+	@./test_pip_tools.sh
