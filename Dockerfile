@@ -6,3 +6,5 @@ RUN microdnf -y install python3.12 python3.12-pip \
 COPY requirements.txt /requirements.txt
 # hadolint ignore=DL3013
 RUN python3.12 -m pip install --no-cache-dir --upgrade pip && python3.12 -m pip install --no-cache-dir -r /requirements.txt
+ARG SOURCE_COMMIT
+LABEL org.opencontainers.image.revision=$SOURCE_COMMIT

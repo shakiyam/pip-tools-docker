@@ -87,6 +87,7 @@ jobs:
       - name: Build
         uses: docker/build-push-action@v7
         with:
+          build-args: SOURCE_COMMIT=${{ github.sha }}
           platforms: linux/amd64
           load: true
           no-cache: true
@@ -125,6 +126,7 @@ jobs:
       - name: Build and Push
         uses: docker/build-push-action@v7
         with:
+          build-args: SOURCE_COMMIT=${{ github.sha }}
           platforms: linux/amd64, linux/arm64
           push: true
           cache-from: type=gha,scope=ci-${{ github.run_id }}
