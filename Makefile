@@ -34,6 +34,9 @@ check_for_library_updates: ## Check for library updates
 
 check_for_updates: check_for_action_updates check_for_image_updates check_for_library_updates ## Check for updates to all dependencies
 
+check_local_image:
+	@./tools/check_local_image.sh ghcr.io/shakiyam/pip-tools
+
 dockerfmt: ## Format Dockerfile
 	@echo -e "\033[36m$@\033[0m"
 	@./tools/dockerfmt.sh -i 2 -n -w Dockerfile
@@ -64,7 +67,7 @@ shfmt: ## Format shell scripts
 	@echo -e "\033[36m$@\033[0m"
 	@./tools/shfmt.sh -l -w -i 2 -ci -bn pip-compile test_pip_tools.sh tools/*.sh
 
-test: ## Test Docker image
+test: check_local_image ## Test Docker image
 	@echo -e "\033[36m$@\033[0m"
 	@./test_pip_tools.sh
 
