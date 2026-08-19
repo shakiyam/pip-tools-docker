@@ -35,7 +35,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
   test:
-    name: Build and Test
+    name: Test pip-tools
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
