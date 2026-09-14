@@ -4,7 +4,7 @@
 #
 #    pip-compile --no-index --strip-extras
 #
-build==1.6.0
+build==1.6.1
     # via pip-tools
 click==8.5.0
     # via pip-tools
