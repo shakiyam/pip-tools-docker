@@ -6,7 +6,7 @@ ALL_TARGETS := $(shell grep -E -o ^[0-9A-Za-z_-]+: $(MAKEFILE_LIST) | sed 's/://
 .PHONY: $(ALL_TARGETS)
 .DEFAULT_GOAL := help
 
-all: check_for_updates format lint build test ## Check for updates, format, lint, build, and test
+all: check_for_updates format lint build pip_licenses test ## Check for updates, format, lint, build, check licenses, and test
 
 actionlint: ## Lint GitHub Actions workflow files
 	@echo -e "\033[36m$@\033[0m"
@@ -58,6 +58,10 @@ lint: actionlint hadolint markdownlint shellcheck zizmor ## Run all linting
 markdownlint: ## Lint Markdown files
 	@echo -e "\033[36m$@\033[0m"
 	@./tools/markdownlint-cli2.sh "*.md"
+
+pip_licenses: check_local_image ## Check licenses of Python dependencies
+	@echo -e "\033[36m$@\033[0m"
+	@./tools/pip_licenses.sh ghcr.io/shakiyam/pip-tools --with-system --allow-only="Apache-2.0 OR BSD-2-Clause;BSD-3-Clause;MIT;MIT License"
 
 shellcheck: ## Lint shell scripts
 	@echo -e "\033[36m$@\033[0m"
