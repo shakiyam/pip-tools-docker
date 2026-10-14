@@ -59,6 +59,8 @@ markdownlint: ## Lint Markdown files
 	@echo -e "\033[36m$@\033[0m"
 	@./tools/markdownlint-cli2.sh "*.md"
 
+# Weak copyleft (e.g. MPL 2.0, LGPL) is allowed for unmodified dependencies;
+# --with-system keeps pip-licenses' own dependencies, which the application may share, in the check
 pip_licenses: check_local_image ## Check licenses of Python dependencies
 	@echo -e "\033[36m$@\033[0m"
 	@./tools/pip_licenses.sh ghcr.io/shakiyam/pip-tools --with-system --allow-only="Apache-2.0 OR BSD-2-Clause;BSD-3-Clause;MIT;MIT License"
