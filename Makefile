@@ -37,9 +37,10 @@ check_for_updates: check_for_action_updates check_for_image_updates check_for_li
 check_local_image:
 	@./tools/check_local_image.sh ghcr.io/shakiyam/pip-tools
 
+# --space-redirects=false writes redirects like shfmt does (>/dev/null); dockerfmt 1.0 adds a space by default
 dockerfmt: ## Format Dockerfile
 	@echo -e "\033[36m$@\033[0m"
-	@./tools/dockerfmt.sh -i 2 -n -w Dockerfile
+	@./tools/dockerfmt.sh -i 2 -n --space-redirects=false -w Dockerfile
 
 format: dockerfmt shfmt yamlfmt ## Run all formatting
 
