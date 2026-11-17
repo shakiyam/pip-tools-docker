@@ -8,3 +8,5 @@ COPY requirements.txt /requirements.txt
 RUN python3.12 -m pip install --no-cache-dir --upgrade pip && python3.12 -m pip install --no-cache-dir -r /requirements.txt
 ARG SOURCE_COMMIT
 LABEL org.opencontainers.image.revision=$SOURCE_COMMIT
+# nobody:nogroup
+USER 65534:65534

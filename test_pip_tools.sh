@@ -17,9 +17,18 @@ readonly IMAGE_NAME
 if [[ $CONTAINER_ENGINE == docker ]]; then
   ENGINE_OPTS=(-u "$(id -u):$(id -g)")
 else
-  ENGINE_OPTS=(--security-opt label=disable)
+  # The image runs as a non-root USER, which rootless Podman maps to a subuid that
+  # cannot write the caller's files; keep-id plus -u runs as the caller instead.
+  ENGINE_OPTS=(--security-opt label=disable --userns=keep-id -u "$(id -u):$(id -g)")
 fi
 readonly ENGINE_OPTS
+
+# Started without the wrapper's -u, the image itself must not run as root
+IMAGE_UID=$($CONTAINER_ENGINE container run --rm --pull=never "$IMAGE_NAME" id -u)
+if [[ $IMAGE_UID == 0 ]]; then
+  echo_error 'Test failed: the pip-tools image runs as root.'
+  exit 1
+fi
 
 WORK_DIR=$(mktemp -d)
 readonly WORK_DIR
